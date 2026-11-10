@@ -1,0 +1,712 @@
+@import "tailwindcss";
+
+@theme {
+  --color-p3r-navy-950: #010611;
+  --color-p3r-navy-900: #020c1e;
+  --color-p3r-navy-800: #051633;
+  --color-p3r-navy-700: #0a2552;
+  --color-p3r-navy-600: #103774;
+  --color-p3r-blue: #0055ff;
+  --color-p3r-cyan: #00e5ff;
+  --color-p3r-red: #ff1e56;
+  --color-p3r-pink: #ff2a85;
+  --color-p3r-gold: #ffd000;
+
+  --font-display: "Chakra Petch", sans-serif;
+  --font-tactical: "Rajdhani", sans-serif;
+  --font-mono: "Share Tech Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+}
+
+/* =========================================
+   BASE STYLES & CRT
+========================================= */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #010814;
+    color: #f1f5f9;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #020c1e;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #0a2552;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00e5ff;
+  }
+}
+
+/* =========================================
+   PERSONA 3 RELOAD EXACT UI STYLING
+========================================= */
+@layer utilities {
+  /* Skew Angles */
+  .p3r-skew {
+    transform: skewX(-12deg);
+  }
+
+  .p3r-unskew {
+    transform: skewX(12deg);
+  }
+
+  .p3r-skew-gentle {
+    transform: skewX(-6deg);
+  }
+
+  .p3r-unskew-gentle {
+    transform: skewX(6deg);
+  }
+
+  /* P3R Deep Caustic Water Background */
+  .p3r-water-bg {
+    background: radial-gradient(circle at 75% 20%, rgba(0, 229, 255, 0.22) 0%, transparent 45%),
+                radial-gradient(circle at 25% 80%, rgba(0, 85, 255, 0.28) 0%, transparent 50%),
+                linear-gradient(180deg, #010611 0%, #03132e 35%, #062354 70%, #010814 100%);
+  }
+
+  /* Iconic P3R Slash Badge (Image 3: SKILL button) */
+  .p3r-slash-badge {
+    position: relative;
+    background: #ffffff;
+    color: #ff1e56;
+    transform: skewX(-16deg) rotate(-2deg);
+    border: 3px solid #ff1e56;
+    box-shadow: 4px 4px 0px #ff2a85, -2px -2px 0px #00e5ff, 0 0 25px rgba(255, 30, 86, 0.5);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .p3r-slash-badge:hover {
+    transform: skewX(-16deg) rotate(-2deg) scale(1.05);
+    box-shadow: 6px 6px 0px #ff2a85, -4px -4px 0px #00e5ff, 0 0 35px rgba(255, 30, 86, 0.8);
+  }
+
+  /* P3R Commu Card Ribbon (Image 4: Social Link Cards) */
+  .p3r-commu-card {
+    position: relative;
+    clip-path: polygon(18px 0%, 100% 0%, calc(100% - 18px) 100%, 0% 100%);
+    transition: all 0.22s ease-out;
+  }
+
+  .p3r-commu-card:hover {
+    transform: translateX(12px) scale(1.02);
+  }
+
+  /* P3R Party Member Bar (Image 5: HP/SP Bars) */
+  .p3r-party-bar {
+    clip-path: polygon(24px 0%, 100% 0%, calc(100% - 24px) 100%, 0% 100%);
+    transition: all 0.2s ease-out;
+  }
+
+  .p3r-party-bar:hover {
+    transform: translateX(8px);
+  }
+
+  /* =========================================
+     ANGULAR CORNER-CUT SYSTEM
+     P3R chamfered corners — diagonal geometric UI
+     shapes (badges, buttons, labels, panels).
+     Note: clip-path clips borders along the
+     chamfer edge, so the diagonal reads as a
+     clean cut (consistent with p3r-commu-card).
+  ========================================= */
+  .cut-corner-br {
+    clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0% 100%);
+  }
+
+  .cut-corner-bl {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 14px 100%, 0% calc(100% - 14px));
+  }
+
+  .cut-corner-tr {
+    clip-path: polygon(0% 0%, calc(100% - 14px) 0%, 100% 14px, 100% 100%, 0% 100%);
+  }
+
+  .cut-corner-tl {
+    clip-path: polygon(14px 0%, 100% 0%, 100% 100%, 0% 100%, 0% calc(100% - 14px));
+  }
+
+  /* Large chamfer for big content panels / cards */
+  .cut-corner-lg {
+    clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0% 100%);
+  }
+
+  /* Neon Glow Text */
+  .glow-cyan {
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.8), 0 0 20px rgba(0, 229, 255, 0.4);
+  }
+
+  .glow-red {
+    text-shadow: 0 0 10px rgba(255, 30, 86, 0.8), 0 0 20px rgba(255, 30, 86, 0.4);
+  }
+
+  .glow-white {
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+  }
+
+  /* Giant Watermark Text (Image 4: COMMU) */
+  .p3r-watermark {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.04);
+    letter-spacing: -0.05em;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Floating P3R Crystal Shards */
+  .p3r-shard {
+    position: absolute;
+    clip-path: polygon(50% 0%, 100% 70%, 50% 100%, 0% 30%);
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.35) 0%, rgba(255, 42, 133, 0.3) 100%);
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* CRT Scanlines */
+  .scanline-bg {
+    background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%, 
+      rgba(0, 0, 0, 0.25) 50%
+    ), linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.03),
+      rgba(0, 255, 0, 0.01),
+      rgba(0, 255, 0, 0.03)
+    );
+    background-size: 100% 3px, 6px 100%;
+    pointer-events: none;
+  }
+
+  /* Diagonal Stripe Pattern */
+  .stripe-blue {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(0, 229, 255, 0.05),
+      rgba(0, 229, 255, 0.05) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+  }
+
+  /* =========================================
+     P3R EDITORIAL DESIGN LANGUAGE (Phase 5 refinement)
+     Extracted from Persona 3 Reload screenshots:
+     - Asymmetric diagonal band lists (screenshot 2, 5)
+     - Slash dividers (screenshot 4 SKILL menu)
+     - Bleed-edge oversized typography
+     - Stairstep menu indentation
+  ========================================= */
+
+  /* Diagonal band — the stairstep list row from screenshots 2 & 5.
+     Left edge has a sharp inward diagonal cut. Used for nav + list items. */
+  .p3r-diagonal-band {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 20px 100%);
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                clip-path 0.18s ease;
+  }
+
+  /* Active/selected diagonal band — wider left cut for selected state */
+  .p3r-diagonal-band-active {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  /* Full-width slash divider — a thin diagonal rule, P3R editorial separator */
+  .p3r-slash-divider {
+    position: relative;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #00e5ff 20%,
+      #0055ff 60%,
+      transparent 100%
+    );
+    transform: skewX(-12deg);
+    transform-origin: left center;
+  }
+
+  /* Accent slash — a tight angular badge-slash from the SKILL menu (screenshot 4) */
+  .p3r-accent-slash {
+    position: relative;
+  }
+  .p3r-accent-slash::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #ff1e56;
+    transform: skewX(-20deg);
+    z-index: -1;
+  }
+
+  /* Bleed text — typography that exceeds the container intentionally,
+     creating the oversized editorial feel from screenshot 4 & 5 */
+  .p3r-bleed-left {
+    margin-left: -0.04em;
+    letter-spacing: -0.04em;
+  }
+
+  /* Oversized watermark label — used as section identity (e.g. 調書, COMMU) */
+  .p3r-section-kanji {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.06);
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Vertical side-label — rotated micro text used as section category marker */
+  .p3r-side-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-family: "Share Tech Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(0, 229, 255, 0.5);
+    user-select: none;
+  }
+
+  /* Stepped indent — each subsequent item shifts right, creating the
+     P3R staircase depth effect (screenshot 2: Makoto > Yukari > Junpei) */
+  .p3r-step-1 { transform: translateX(0px); }
+  .p3r-step-2 { transform: translateX(12px); }
+  .p3r-step-3 { transform: translateX(24px); }
+  .p3r-step-4 { transform: translateX(36px); }
+  .p3r-step-5 { transform: translateX(48px); }
+
+  /* Thin horizontal rule with left-anchored cyan accent */
+  .p3r-rule {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, #00e5ff 0%, rgba(0, 229, 255, 0.15) 40%, transparent 100%);
+  }
+
+  /* Angular left-edge accent bar — replaces generic left-border convention */
+  .p3r-left-accent {
+    position: relative;
+    padding-left: 1rem;
+  }
+  .p3r-left-accent::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #ff1e56 0%, #00e5ff 100%);
+    transform: skewY(-8deg);
+  }
+}
+
+/* =========================================
+   KEYFRAME ANIMATIONS
+========================================= */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+@keyframes water-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.03); }
+}
+
+/* Subtle CRT flicker for live/active banners (cinematic, minimal) */
+@keyframes flicker {
+  0%, 39%, 41%, 100% { opacity: 1; }
+  40% { opacity: 0.5; }
+  60%, 62% { opacity: 1; }
+  61% { opacity: 0.7; }
+}
+
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+.animate-water-pulse {
+  animation: water-pulse 6s ease-in-out infinite;
+}
+
+.animate-flicker {
+  animation: flicker 4s ease-in-out infinite;
+}
+
+/* =========================================
+   PHASE 3 — HERO & BOOT ANIMATIONS (restrained)
+========================================= */
+
+/* Moon: slow breathing glow + scale */
+@keyframes moon-glow {
+  0%, 100% { opacity: 0.9; transform: scale(1); filter: brightness(1); }
+  50% { opacity: 1; transform: scale(1.03); filter: brightness(1.15); }
+}
+
+.animate-moon-glow {
+  animation: moon-glow 8s ease-in-out infinite;
+}
+
+/* Diagonal light beams: subtle opacity sweep */
+@keyframes beam-sweep {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.4; }
+}
+
+.animate-beam-sweep {
+  animation: beam-sweep 7s ease-in-out infinite;
+}
+
+/* Hero / boot content: gentle fade + rise entrance */
+@keyframes hero-rise {
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-hero-rise {
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Respect reduced-motion preferences across the P3R interface */
+@media (prefers-reduced-motion: reduce) {
+  .animate-moon-glow,
+  .animate-beam-sweep,
+  .animate-hero-rise,
+  .animate-flicker,
+  .animate-float-slow,
+  .animate-water-pulse {
+    animation: none !important;
+  }
+}
+
+/* =========================================
+   PHASE 5 — ANIMATIONS & INTERACTIONS
+========================================= */
+
+/* ── Scroll reveal entrance ──────────────── */
+@keyframes reveal-up {
+  0%   { opacity: 0; transform: translateY(28px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes reveal-left {
+  0%   { opacity: 0; transform: translateX(-20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.animate-reveal-up {
+  animation: reveal-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-reveal-left {
+  animation: reveal-left 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Pre-hidden state — set before IntersectionObserver fires */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* ── Detail-panel swap fade ──────────────── */
+@keyframes panel-in {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-panel-in {
+  animation: panel-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Mobile drawer slide ─────────────────── */
+@keyframes drawer-down {
+  0%   { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-drawer-down {
+  animation: drawer-down 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Button press feedback ───────────────── */
+/* Applied via Tailwind active: utilities in JSX */
+
+/* ── Particle dot pulse ──────────────────── */
+@keyframes particle-pulse {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50%       { opacity: 0.4;  transform: scale(1.4); }
+}
+
+.animate-particle-pulse {
+  animation: particle-pulse 3s ease-in-out infinite;
+}
+
+/* ── Nav active-state slide indicator ───── */
+.nav-active-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ff1e56;
+  transform-origin: left;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity  0.2s ease;
+}
+
+/* ── Reduced-motion overrides (Phase 5) ─── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-reveal-up,
+  .animate-reveal-left,
+  .animate-panel-in,
+  .animate-drawer-down,
+  .animate-particle-pulse {
+    animation: none !important;
+  }
+
+  .reveal-hidden {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================
+   PHASE 7 — RESPONSIVE, A11Y & PERFORMANCE
+========================================= */
+
+/* ── GPU compositing hints ────────────────
+   Promote looping animated elements to their
+   own compositor layer so the browser doesn't
+   repaint the whole page on each frame.     */
+.animate-float-slow,
+.animate-moon-glow,
+.animate-beam-sweep,
+.animate-water-pulse {
+  will-change: transform, opacity;
+}
+
+.animate-hero-rise,
+.animate-reveal-up,
+.animate-reveal-left,
+.animate-panel-in,
+.animate-drawer-down {
+  will-change: transform, opacity;
+}
+
+/* ── Global focus-visible ring ────────────
+   Provides a consistent, high-contrast focus
+   indicator for keyboard navigation across
+   every interactive element (links, buttons,
+   inputs that don't override it).
+   Uses :focus-visible so mouse clicks don't
+   show the ring (only keyboard/switch nav). */
+:focus-visible {
+  outline: 2px solid #00e5ff;
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Inputs already have their own focus ring
+   (focus:ring-[#00e5ff]). Defer to that. */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+
+/* ── Minimum touch target ─────────────────
+   Interactive elements (buttons, links)
+   should be at least 44×44px on touch
+   devices per WCAG 2.5.5.               */
+@media (pointer: coarse) {
+  button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ── Reduced-motion additions ─────────────
+   Catch the will-change additions too.   */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-moon-glow,
+  .animate-beam-sweep,
+  .animate-water-pulse,
+  .animate-hero-rise,
+  .animate-reveal-up,
+  .animate-reveal-left,
+  .animate-panel-in,
+  .animate-drawer-down {
+    will-change: auto !important;
+  }
+}
+
+/* =========================================
+   LIGHT MODE — [data-theme="light"]
+   P3R-inspired light theme: clean white/pearl
+   background, deep navy typography, cyan/blue
+   accents preserved. Scanlines and particles
+   are hidden. The P3R diagonal geometry stays.
+   Transition applied to bg/color/border.
+========================================= */
+
+/* Global transition so theme switch is smooth */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+/* Suppress transition on animated elements so they aren't sluggish */
+.animate-float-slow,
+.animate-moon-glow,
+.animate-beam-sweep,
+.animate-hero-rise,
+.animate-reveal-up,
+.animate-panel-in,
+.animate-drawer-down,
+.animate-water-pulse,
+.animate-flicker,
+.p3r-shard {
+  transition: none !important;
+}
+
+[data-theme="light"] {
+  /* ── body & root ── */
+  --lm-bg:          #f0f4ff;   /* soft blue-white */
+  --lm-bg-2:        #e4ecff;   /* slightly deeper */
+  --lm-bg-card:     #ffffff;
+  --lm-bg-raised:   #edf2ff;
+  --lm-text:        #0a1a40;   /* deep navy */
+  --lm-text-muted:  #3a5080;
+  --lm-text-faint:  #7090b8;
+  --lm-border:      rgba(0,85,255,0.15);
+  --lm-border-2:    rgba(0,85,255,0.08);
+}
+
+/* Body background & text */
+[data-theme="light"] body {
+  background-color: #f0f4ff;
+  color: #0a1a40;
+}
+
+/* Scrollbar in light mode */
+[data-theme="light"] ::-webkit-scrollbar-track { background: #e4ecff; }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: #adc5ff; }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: #0055ff; }
+
+/* Water background override */
+[data-theme="light"] .p3r-water-bg {
+  background:
+    radial-gradient(circle at 75% 20%, rgba(0,85,255,0.08) 0%, transparent 45%),
+    radial-gradient(circle at 25% 80%, rgba(0,229,255,0.06) 0%, transparent 50%),
+    linear-gradient(180deg, #f8faff 0%, #edf2ff 40%, #e0eaff 100%);
+}
+
+/* Hide CRT scanline overlay and particles in light mode (not appropriate) */
+[data-theme="light"] .scanline-bg { display: none; }
+[data-theme="light"] .p3r-shard   { opacity: 0.08; }
+[data-theme="light"] canvas        { opacity: 0.15; }
+
+/* Navigation bar */
+[data-theme="light"] header {
+  background-color: rgba(240,244,255,0.98) !important;
+  border-bottom-color: rgba(0,85,255,0.12) !important;
+}
+
+/* Nav brand text */
+[data-theme="light"] header .text-white { color: #0a1a40; }
+[data-theme="light"] header .text-slate-400 { color: #3a5080; }
+[data-theme="light"] header .text-slate-700 { color: #7090b8; }
+
+/* Mobile drawer */
+[data-theme="light"] .animate-drawer-down {
+  background: #edf2ff !important;
+  border-top-color: rgba(0,85,255,0.12) !important;
+}
+
+/* Footer */
+[data-theme="light"] footer {
+  background-color: rgba(240,244,255,0.98) !important;
+  border-top-color: rgba(0,85,255,0.12) !important;
+}
+
+/* Generic card/panel overrides — dark navy panels → white/pearl */
+[data-theme="light"] .bg-\[\#03132e\]\/80,
+[data-theme="light"] .bg-\[\#03132e\]\/85,
+[data-theme="light"] .bg-\[\#03132e\]\/90,
+[data-theme="light"] .bg-\[\#051633\]\/90,
+[data-theme="light"] .bg-\[\#051633\]\/80,
+[data-theme="light"] .bg-\[\#020c1e\] {
+  background-color: rgba(255,255,255,0.9) !important;
+}
+
+[data-theme="light"] .bg-\[\#010814\]\/80,
+[data-theme="light"] .bg-\[\#010814\]\/90,
+[data-theme="light"] .bg-\[\#010814\] {
+  background-color: rgba(237,242,255,0.9) !important;
+}
+
+/* Body text in light mode */
+[data-theme="light"] .text-slate-100 { color: #0a1a40; }
+[data-theme="light"] .text-slate-200 { color: #1a2e55; }
+[data-theme="light"] .text-slate-300 { color: #2a4070; }
+[data-theme="light"] .text-slate-400 { color: #3a5080; }
+[data-theme="light"] .text-slate-500 { color: #5070a0; }
+[data-theme="light"] .text-white      { color: #0a1a40; }
+
+/* Keep accent colors — cyan, red, gold stay vibrant */
+/* (text-[#00e5ff], text-[#ff1e56], text-[#ffd000] are intentionally unchanged) */
+
+/* White text on colored backgrounds (badges, active nav) must stay white */
+[data-theme="light"] .text-\[\#010814\] { color: #010814; }
+
+/* Borders */
+[data-theme="light"] .border-\[\#00e5ff\]\/30 { border-color: rgba(0,85,255,0.2) !important; }
+[data-theme="light"] .border-\[\#00e5ff\]\/20 { border-color: rgba(0,85,255,0.15) !important; }
+[data-theme="light"] .border-\[\#00e5ff\]\/40 { border-color: rgba(0,85,255,0.25) !important; }
+
+/* Glow text — reduce intensity in light mode */
+[data-theme="light"] .glow-white {
+  text-shadow: 0 0 8px rgba(0,85,255,0.3);
+}
+[data-theme="light"] .glow-cyan {
+  text-shadow: 0 0 8px rgba(0,85,255,0.4);
+}
+
+/* P3R watermark — darken slightly so it shows on white bg */
+[data-theme="light"] .p3r-watermark {
+  color: rgba(0,30,100,0.05);
+}
+[data-theme="light"] .p3r-section-kanji {
+  color: rgba(0,30,100,0.04) !important;
+}
+
+/* Selection colour */
+[data-theme="light"] ::selection {
+  background-color: #0055ff;
+  color: #ffffff;
+}
